@@ -1,0 +1,37 @@
+services:
+  # DB
+  # services databases here
+
+
+  # SERVICES feature
+  order:    
+    container_name: order
+    build: ./services/order
+    volumes:
+      - ./services/order:/app:ro
+
+  product-a:    
+    container_name: product-a
+    build: ./services/product
+    volumes:
+      - ./services/product:/app:ro
+  product-b:    
+    container_name: product-b
+    build: ./services/product
+    volumes:
+      - ./services/product:/app:ro
+
+  user:    
+    container_name: user
+    build: ./services/user
+    volumes:
+      - ./services/user:/app
+
+  # API GATEWAY
+  nginx:
+    container_name: nginx
+    image: nginx:alpine3.18-slim
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
